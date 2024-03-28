@@ -1,0 +1,12 @@
+html, body, #root{
+  background: #eee;
+  height: 100vh;
+  
+
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
