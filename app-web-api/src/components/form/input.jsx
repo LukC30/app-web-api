@@ -8,12 +8,12 @@ export default function Input({type, id, text, name, placeholder, value, handler
             <label htmlFor={name}>{text}</label>
             
             <input
-            type={type}
-            name={name}
-            id={id}
-            placeholder={placeholder}
-            value={value}
-            onChange={handlerOnChange}
+                type={type}
+                name={name}
+                id={id}
+                placeholder={placeholder}
+                value={value}
+                onChange={handlerOnChange}
             />
         </div>
     )

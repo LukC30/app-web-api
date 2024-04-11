@@ -1,11 +1,31 @@
 {
-    "Books": [],
-    "Categories":[
+    "Books": [
+        {
+            "id": "94dc",
+            "nome_livro": "Xisde",
+            "nome_autor": "oola",
+            "descricao_livro": "descscas",
+            "categrory": {
+                "id": "1",
+                "category": "Ficção Cientifica"
+            }
+        },
+        {
+            "id": "18d3",
+            "nome_livro": "Xisde",
+            "nome_autor": "oola",
+            "descricao_livro": "descscas",
+            "categrory": {
+                "id": "1",
+                "category": "Ficção Cientifica"
+            }
+        }
+    ],
+    "Categories": [
         {
             "id": "1",
-            "name": "Ficção cientifica"
+            "name": "Ficção Cientifica"
         },
-        
         {
             "id": "2",
             "name": "Back-end"
@@ -20,7 +40,7 @@
         },
         {
             "id": "5",
-            "name": "Cloud computer"
+            "name": "Cloud Computer"
         }
     ]
 }
