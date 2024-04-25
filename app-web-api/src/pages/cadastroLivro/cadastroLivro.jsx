@@ -65,7 +65,7 @@ export default function CadastroLivro() {
         })
         .then((response)=>{
             console.log(response);
-            navigate("/listaLivros");
+            navigate("/listaLivros", {state: 'livro cadastrado com sucesso'});
         })
         .catch((error)=>{
             console.log(`Deu algo errado aí irmão: ${error}`)
