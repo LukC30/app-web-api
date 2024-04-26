@@ -43,27 +43,16 @@ function ListaLivros() {
                 />
             }
             {/* <Container> */}
+            {books.map((book,index)=>(
             <Cardbook
-                id={'oi'}
-                name={'xisde'}
-                actor={"to cansadito"}
-                category={'categoria'}
-
-            />
-            <Cardbook
-                id={'oi'}
-                name={'xisde'}
-                actor={"to cansadito"}
-                category={'categoria'}
-
-            />
-            <Cardbook
-                id={'oi'}
-                name={'xisde'}
-                actor={"to cansadito"}
-                category={'categoria'}
-
-            />
+                id={book.id}
+                name={book.nome_livro}
+                actor={book.nome_autor}
+                category={book.categrory.category}
+            
+            />))
+            
+            }
             {/* </Container> */}
 
 
