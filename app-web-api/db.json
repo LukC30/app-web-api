@@ -1,36 +1,5 @@
 {
-  "Books": [
-    {
-      "id": "94dc",
-      "nome_livro": "Xisde",
-      "nome_autor": "oola",
-      "descricao_livro": "descscas",
-      "categrory": {
-        "id": "1",
-        "category": "Ficção Cientifica"
-      }
-    },
-    {
-      "id": "18d3",
-      "nome_livro": "Xisde",
-      "nome_autor": "oola",
-      "descricao_livro": "descscas",
-      "categrory": {
-        "id": "1",
-        "category": "Ficção Cientifica"
-      }
-    },
-    {
-      "id": "e7b8",
-      "nome_livro": "casdasda",
-      "nome_autor": "asdasd",
-      "descricao_livro": "asdasd",
-      "categrory": {
-        "id": "2",
-        "category": "Back-end"
-      }
-    }
-  ],
+  "Books": [],
   "Categories": [
     {
       "id": "1",

@@ -8,7 +8,7 @@ import Cardbook from '../../components/cardbook/cardbook.jsx';
 function ListaLivros() {
 
     const [books, setBooks] = useState([]);
-
+    let bookMessage                        
     useEffect(() => {
         fetch('http://localhost:5000/Books', {
             method: 'GET',
@@ -32,6 +32,30 @@ function ListaLivros() {
         message = location.state;
     };
 
+    function removeBook (id) {
+        fetch(`http://localhost:5000/Books/${id}`,{
+            method:'DELETE',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+        .then((response)=>{
+            return response.json()
+        })
+        .then((response)=>{
+            console.log(response.id)
+            setBooks(books.filter((response)=>
+                response.id != id
+
+            ))
+        })
+        .catch((error)=>{
+            console.error(error)
+        })
+
+
+    }
+
     return (
         <section className={styles.livro_container}>
             <h1>Listagem</h1>
@@ -46,10 +70,12 @@ function ListaLivros() {
             {books.map((book,index)=>(
             <Cardbook
                 id={book.id}
+                description={book.descricao_livro}
                 name={book.nome_livro}
                 actor={book.nome_autor}
                 category={book.categrory.category}
-            
+                handlerRemove={removeBook}
+                key={book.id}
             />))
             
             }
