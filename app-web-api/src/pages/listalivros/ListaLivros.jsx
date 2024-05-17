@@ -7,8 +7,7 @@ import Cardbook from '../../components/cardbook/cardbook.jsx';
 
 function ListaLivros() {
 
-    const [books, setBooks] = useState([]);
-    let bookMessage                        
+    const [books, setBooks] = useState([]);                      
     useEffect(() => {
         fetch('http://localhost:5000/Books', {
             method: 'GET',

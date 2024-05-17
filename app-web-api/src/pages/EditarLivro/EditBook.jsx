@@ -1,20 +1,34 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import styles from './cadastroLivro.module.css'
-import Input from '../../components/form/input'
-import Select from '../../components/form/select'
+import styles from './editbook.module.css';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import Input from '../../components/form/input';
+import Select from '../../components/form/select';
 
-export default function CadastroLivro() {
+export default function EditBook(params) {
 
-    const navigate = useNavigate("");
+    //recuperando o id da url fe
+    const [book, setBook] = useState({});
     const [categories, setCategories] = useState([]);
 
-    //Estado de dado que armazena o estado de livro em um JSON
-    const [book, setBook] = useState({});
-    
-    useEffect(() => {
 
-        fetch('http://localhost:5000/Categories',
+    const { id } = useParams();
+    console.log(id)
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/Books/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+            .then((response) => { return response.json() })
+            .then((response) => {
+
+                console.log(response);
+                setBook(response);
+                console.log(book);
+            });
+            fetch('http://localhost:5000/Categories',
             {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' }
@@ -33,54 +47,51 @@ export default function CadastroLivro() {
                     console.log(`Não foi possivel fazer o fetch do conteudo: ${error}`)
                 }
             )
-    },
-        []);
-
-    function handlerBook(event) {
-        event.preventDefault();
-        console.log(book);
-        setBook({...book, [event.target.name] : event.target.value});
+        }, [])
         
-    }
+        function handlerBook(event) {
+            event.preventDefault();
+            console.log(book);
+            setBook({...book, [event.target.name] : event.target.value});
+            
+        }
+        function handlerCategory(event){
+            setBook({...book, categrory:{
+                id: event.target.value,
+                category: event.target.options[event.target.selectedIndex].text
+            }});
+            console.log(book)
+        }
 
-    function handlerCategory(event){
-        setBook({...book, categrory:{
-            id: event.target.value,
-            category: event.target.options[event.target.selectedIndex].text
-        }});
-        console.log(book)
-    }
+        function editerBook(book){
 
-    function createBook(book){
-
-        fetch('http://localhost:5000/Books',{
-            method: 'POST',
-            headers:{
-                'Content-type' : 'application/json'
-            },
-            body: JSON.stringify(book)
-        })
-        .then((response)=>{
-            return response.json();
-        })
-        .then((response)=>{
-            console.log(response);
-            navigate("/listaLivros", {state: 'livro cadastrado com sucesso'});
-        })
-        .catch((error)=>{
-            console.log(`Deu algo errado aí irmão: ${error}`)
-            return error;
-        })
-
-    }
-    function submit(event){
-        event.preventDefault();
-        createBook(book);
-    }
-
+            fetch(`http://localhost:5000/Books/${id}`,{
+                method: 'PUT',
+                headers:{
+                    'Content-type' : 'application/json'
+                },
+                body: JSON.stringify(book)
+            })
+            .then((response)=>{
+                return response.json();
+            })
+            .then((response)=>{
+                console.log(response);
+                // navigate("/listaLivros", {state: 'livro atualizado com sucesso'});
+            })
+            .catch((error)=>{
+                console.log(`Deu algo errado aí irmão: ${error}`)
+                return error;
+            })
+    
+        }
+        function submit(event){
+            event.preventDefault();
+            editerBook(book);
+        }
     return (
-        <section className={styles.livro_container}>
-            <h1>Cadastre aqui o seu livro</h1>
+        <div className={styles.book_container}>
+            <h1>Edição de livro</h1>
             <form onSubmit={submit}>
                 {/* <p>
                                                                                                                                                                                                                                                                                                                                                                                                                                         <input type="text" placeholder='Nome do livro' id="" />
@@ -100,7 +111,7 @@ export default function CadastroLivro() {
                     id="nome_livro"
                     placeholder="Digite o nome do livro:"
                     text='Digite o titulo do livro'
-
+                    value={book.nome_livro}
                     handlerOnChange={handlerBook}
                 />
                 <Input
@@ -110,6 +121,7 @@ export default function CadastroLivro() {
                     placeholder="Digite o nome do autor"
                     text='Nome do autor'
 
+                    value={book.nome_autor}
                     handlerOnChange={handlerBook}
                 />
                 <Input
@@ -119,6 +131,7 @@ export default function CadastroLivro() {
                     placeholder="Digite a descricao do livro"
                     text='Descrição do livro'
 
+                    value={book.descricao_livro}
                     handlerOnChange={handlerBook}
                 />
 
@@ -126,15 +139,16 @@ export default function CadastroLivro() {
                     name='categoria_id'
                     text='Selecione a categoria'
                     options={categories}
+
+                    value={book.categrory.category}
                     handlerOnChange={handlerCategory}                                                                                                                                                                                                                                                                                                                                                                                                        
                 />
                 <Input
                     type='submit'
                     text='Cadastrar Livro'
                     placeholder="Descrição"
-                    
                 />
             </form>
-        </section>
+        </div>
     )
 }

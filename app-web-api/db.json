@@ -1,5 +1,16 @@
 {
-  "Books": [],
+  "Books": [
+    {
+      "id": "b128",
+      "nome_livro": "oi amor tudo bom?",
+      "nome_autor": "asdasddasda",
+      "descricao_livro": "asdasdasdasdas",
+      "categrory": {
+        "id": "2",
+        "category": "Back-end"
+      }
+    }
+  ],
   "Categories": [
     {
       "id": "1",
