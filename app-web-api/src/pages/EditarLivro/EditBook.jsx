@@ -135,14 +135,14 @@ export default function EditBook(params) {
                     handlerOnChange={handlerBook}
                 />
 
-                <Select
+                {/* <Select
                     name='categoria_id'
                     text='Selecione a categoria'
                     options={categories}
 
                     value={book.categrory.category}
                     handlerOnChange={handlerCategory}                                                                                                                                                                                                                                                                                                                                                                                                        
-                />
+                /> */}
                 <Input
                     type='submit'
                     text='Cadastrar Livro'

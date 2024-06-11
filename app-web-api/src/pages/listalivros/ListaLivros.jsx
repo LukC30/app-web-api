@@ -9,15 +9,18 @@ function ListaLivros() {
 
     const [books, setBooks] = useState([]);                      
     useEffect(() => {
-        fetch('http://localhost:5000/Books', {
+        fetch('http://localhost:5000/listagemLivros', {
             method: 'GET',
+            mode: 'cors',
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json', 
+                "Access-Control-Allow-Origin" : "*",
+                "Access-Control-Allow-Headers" : "*"
             }
         }).then((response) => {
             return response.json();
         }).then((data) => {
-            setBooks(data);
+            setBooks(data.data);
             console.log(books);
         }).catch((error) => {
             alert(`erro amigao: ${error}`)
@@ -32,10 +35,12 @@ function ListaLivros() {
     };
 
     function removeBook (id) {
-        fetch(`http://localhost:5000/Books/${id}`,{
+        fetch(`http://localhost:5000/excluirLivro/${id}`,{
             method:'DELETE',
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                "Access-Control-Allow-Origin" : "*",
+                "Access-Control-Allow-Headers" : "*"
             }
         })
         .then((response)=>{
@@ -68,13 +73,13 @@ function ListaLivros() {
             {/* <Container> */}
             {books.map((book,index)=>(
             <Cardbook
-                id={book.id}
+                id={book.cod_livro}
                 description={book.descricao_livro}
                 name={book.nome_livro}
                 actor={book.nome_autor}
-                category={book.categrory.category}
+                // category={book.categrory.category}
                 handlerRemove={removeBook}
-                key={book.id}
+                key={book.cod_livro}
             />))
             
             }

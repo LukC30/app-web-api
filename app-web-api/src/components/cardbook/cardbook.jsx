@@ -23,7 +23,7 @@ export default function CardBook({ id, name, actor, category, description, handl
             </p>
             <div className={styles.book_card_actions}>
                 <Link to={`/editLivro/${id}`}>
-                    Penis
+                    Editar
                 </Link>
                 <button onClick={remove}>
                     Excluir
