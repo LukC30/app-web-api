@@ -12,29 +12,28 @@ export default function CadastroLivro() {
     //Estado de dado que armazena o estado de livro em um JSON
     const [book, setBook] = useState({});
     
-    useEffect(() => {
-
-        fetch('http://localhost:5000/Categories',
-            {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(
-                (response) => response.json()
-            ).then(
-                (data) => {
-                    setCategories(data);
-                    console.log(data);
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/Categories',
+    //         {
+    //             method: 'GET',
+    //             headers: { 'Content-Type': 'application/json' }
+    //         })
+    //         .then(
+    //             (response) => response.json()
+    //         ).then(
+    //             (data) => {
+    //                 setCategories(data);
+    //                 console.log(data);
                     
-                }
-            )
-            .catch(
-                (error) => {
-                    console.log(`Não foi possivel fazer o fetch do conteudo: ${error}`)
-                }
-            )
-    },
-        []);
+    //             }
+    //         )
+    //         .catch(
+    //             (error) => {
+    //                 console.log(`Não foi possivel fazer o fetch do conteudo: ${error}`)
+    //             }
+    //         )
+    // },
+    //     []);
 
     function handlerBook(event) {
         event.preventDefault();
@@ -52,11 +51,13 @@ export default function CadastroLivro() {
     }
 
     function createBook(book){
-
-        fetch('http://localhost:5000/Books',{
+        fetch('http://localhost:5000/inserirLivro',{
             method: 'POST',
+            mode: 'cors',
             headers:{
-                'Content-type' : 'application/json'
+                'Content-type' : 'application/json',
+                "Access-Control-Allow-Origin" : "*",
+                "Access-Control-Allow-Headers" : "*"
             },
             body: JSON.stringify(book)
         })
@@ -93,7 +94,8 @@ export default function CadastroLivro() {
                                                                                                                                                                                                                                                                                                                                                                                                                                     </p>
                                                                                                                                                                                                                                                                                                                                                                                                                                     <p>
                                                                                                                                                                                                                                                                                                                                                                                                                                         <input type="Submit" value="Cadastro livro" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                    </p> */}
+                                                                                                                                                                                                                                                                                                                                                                                                                                    </p> 
+                */}
                 <Input
                     type="text"
                     name="nome_livro"
@@ -105,7 +107,7 @@ export default function CadastroLivro() {
                 />
                 <Input
                     type="text"
-                    name="nome_autor"
+                    name="autor_livro"
                     id="nome_autor"
                     placeholder="Digite o nome do autor"
                     text='Nome do autor'

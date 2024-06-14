@@ -49,15 +49,16 @@ function ListaLivros() {
         .then((response)=>{
             console.log(response.id)
             setBooks(books.filter((response)=>
-                response.id != id
-
+                response.cod_livro != id
+               
             ))
+            // setBookMessage()
         })
         .catch((error)=>{
             console.error(error)
         })
 
-
+        console.log(message);
     }
 
     return (
@@ -65,6 +66,7 @@ function ListaLivros() {
             <h1>Listagem</h1>
             <span>Aqui seus livros serão listados</span>
             {
+                
                 message && <Message
                     msg={message}
                     type='sucess'
